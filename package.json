@@ -1,0 +1,26 @@
+{
+  "name": "my-node",
+  "version": "1.0.0",
+  "description": "node学习",
+  "main": "index.js",
+  "engines": {
+    "node": ">=4.2.0",
+    "npm": "^3.0.0"
+  },
+  "scripts": {
+  },
+  "betterScripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@https://github.com/zhoulin-cirlce/node.git"
+  },
+  "author": "珂玥",
+  "license": "MIT",
+  "dependencies": {
+   
+  },
+  "devDependencies": {
+   
+  }
+}
