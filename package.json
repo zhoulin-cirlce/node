@@ -2,7 +2,7 @@
   "name": "my-node",
   "version": "1.0.0",
   "description": "node学习",
-  "main": "index.js",
+  "main": "main.js",
   "engines": {
     "node": ">=4.2.0",
     "npm": "^3.0.0"
