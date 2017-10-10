@@ -70,7 +70,7 @@ fs.readFile(__dirname+'/input.txt',{flag:'r+',encoding:'utf8'},function(err,data
         console.error(err);
         return ;
     }
-    console.log(data);  // 菜鸟教程官网地址：www.runoob.com
+    console.log(data);  // 测试数据
 
 })
 
