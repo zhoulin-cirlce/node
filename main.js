@@ -50,3 +50,5 @@ var emitter = new events.EventEmitter();
 // emitter.emit('error');
 
 console.log('程序执行完毕！')
+
+

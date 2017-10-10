@@ -1,0 +1,19 @@
+REPL:
+  在终端以node命令进入node模式。
+  下划线 _ 变量：可以获取表达式的结果，如：
+	node
+	var x=9; var y=5;
+	x+y
+	var sum=_
+	console.log(sum);	//14  
+  命令：ctrl+c   退出当前终端
+	ctrl+c两次  退出Node REPL
+	ctrl+d   退出Node REPL
+	向上/向下  查看输入历史命令
+	tab键	列出当前命令
+	.help   列出可使用命令
+	.break  退出多行表达式
+	.clear  退出多行表达式
+	.sava filename  保存当前的Node REPL会话到指定文件
+	.load filename  载入当前的Node REPL会话的文件内容
+fs文件系统模块： http://www.jianshu.com/p/5683c8a93511 
