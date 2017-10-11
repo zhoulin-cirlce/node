@@ -116,26 +116,114 @@ var fs=require('fs');
  * position, 整数，读取文件初始位置；文件大小以字节为单位
  * callback(err, bytesRead, buffer), 读取执行完成后回调函数，bytesRead实际读取字节数，被读取的缓存区对象
  */
-fs.open(__dirname+'/input.txt','r',function(err,fd){
-    if(err){
-        console.error(err);
-        return;
-    }else{
-        var buffer=new Buffer(255);
-        console.log(buffer.length);     //缓存空间长度255
-        ////每一个汉字utf8编码是3个字节，英文是1个字节，这里是从第二个节开始读取
-        fs.read(fd,buffer,0,9,3,function(err,bytesRead,buffer){
-            if(err){
-                throw err;
-            }else{
-                console.log(bytesRead);   //9
-                console.log(buffer.slice(0,bytesRead).toString());  //试数据
-                //读取完后，再使用fd读取时，基点是基于上次读取位置计算；
-                fs.read(fd,buffer,0,9,null,function(err,bytesRead,buffer){
-                    console.log(bytesRead);     //9
-                    console.log(buffer.slice(0,bytesRead).toString());  //测试数
-                });
-            }
-        });
-    }
+// fs.open(__dirname+'/input.txt','r',function(err,fd){
+//     if(err){
+//         console.error(err);
+//         return;
+//     }else{
+//         var buffer=new Buffer(255);
+//         console.log(buffer.length);     //缓存空间长度255
+//         ////每一个汉字utf8编码是3个字节，英文是1个字节，这里是从第二个节开始读取
+//         fs.read(fd,buffer,0,9,3,function(err,bytesRead,buffer){
+//             if(err){
+//                 throw err;
+//             }else{
+//                 console.log(bytesRead);   //9
+//                 console.log(buffer.slice(0,bytesRead).toString());  //试数据
+//                 //读取完后，再使用fd读取时，基点是基于上次读取位置计算；
+//                 fs.read(fd,buffer,0,9,null,function(err,bytesRead,buffer){
+//                     console.log(bytesRead);     //9
+//                     console.log(buffer.slice(0,bytesRead).toString());  //测试数
+//                 });
+//             }
+//         });
+//     }
+// })
+
+//6.写文件，将缓冲区内数据写入使用fs.open打开的文件
+// fs.write(fd,buffer,offset,length,position,callback);
+//callback参数：err错误，written实际写入字节数，buffer被读取的缓存区对象
+// fs.open(__dirname+'/input.txt','a',function(err,fd){
+//     if(err){
+//         console.error(err);
+//         return ;
+//     }else{
+//         var buffer=new Buffer('写入文件数据内容');
+//         //写入‘入文件’三个字
+//         fs.write(fd,buffer,3,9,12,function(err,written,buffer){
+//             if(err){
+//                 console.log('写入失败');
+//                 console.error(err);
+//                 return ;
+//             }else{
+//                 console.log('写入成功');
+//             }
+//         })
+//     }
+// })
+
+//7.刷新缓存区 fs.fsync(fd,callback)
+// 使用fs.write写入文件时，操作系统是将数据读到内存，再把数据写入到文件中，当数据读完时并不代表数据已经写完，因为有一部分还可能在内在缓冲区内。
+// 因此可以使用fs.fsync方法将内存中数据写入文件；--刷新内存缓冲区；
+// fs.open(__dirname+'/input.txt','a',function(err,fd){
+//     if(err){
+//         console.error(err);
+//     }else{
+//         var buffer=new Buffer('我爱nodejs编程');
+//         fs.write(fd,buffer,0,9,0,function(err,written,buffer){
+//             console.log(written.toString());
+//             fs.write(fd,buffer,9,buffer.length-9,null,function(err,written){
+//                 console.log(written.toString());
+//                 fs.fsync(fd);
+//                 fs.close(fd);
+//             })
+//         })
+//     }
+// })
+
+//8.创建目录 fs.mkdir(path,[mode],callback);
+//mode表示权限
+// fs.mkdir(__dirname+'/fsDir',function(err){
+//     if(err){
+//         console.error(err);
+//     }else{
+//         console.log('创建目录成功！')
+//     }
+// })
+
+//9.读取目录，列出目录下的子文件名
+//fs.readdir(path,callback);
+//callback(err,files) ,files是数组，读取到目录下的文件
+// fs.readdir(__dirname+'/test',function(err,files){
+//     if(err){
+//         console.error(err);
+//         return ;
+//     }else{
+//         files.forEach(function(file,index){
+//             console.log(index+'---',file)
+//         })
+//     }
+// })
+
+//10查看文件与目录的信息
+//fs.stat(path,callback);或fs.lstat(path,callback);  //查看符号链接文件
+// fs.lstat(__dirname+'/input.txt',function(err,res){
+//     console.log(res)  //返回一个对象，包含文件相关信息
+// })
+
+//11.查看文件与目录是否存在  fs.exists(path,[callback(exists)])  //exists为true是存在
+fs.exists(__dirname+'/input.txt',function(exists){
+    var retTxt=(exists ? '存在': '不存在')
+    console.log(retTxt);
 })
+
+
+
+
+
+
+
+
+
+
+

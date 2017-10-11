@@ -16,4 +16,5 @@ REPL:
 	.clear  退出多行表达式
 	.sava filename  保存当前的Node REPL会话到指定文件
 	.load filename  载入当前的Node REPL会话的文件内容
-fs文件系统模块：path模块， http://www.jianshu.com/p/5683c8a93511 
+fs文件系统模块：path模块，学习： http://www.jianshu.com/p/5683c8a93511  示例：mainfs.js
+

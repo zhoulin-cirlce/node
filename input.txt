@@ -1,1 +1,2 @@
 测试数据这是一段通过fs.writeFile函数写入的内容；
+入文件入文件我爱nodejs编程我爱nodejs编程我爱nodejs编程
