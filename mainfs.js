@@ -1,17 +1,3 @@
-//-----------回调函数-----------
-// var fs=require('fs');  //加载node的fs模块，文件系统
-// var data=fs.readFileSync('input.txt');      //读取文件内容
-// console.log(data.toString());
-// console.log('程序执行结束！');
-
-//异步
-// var fs=require('fs');
-// fs.readFile('input.txt',function(err,data){
-//     if(err) return console.error(err);
-//     console.log(data.toString());
-// });
-// console.log("程序执行结束！");
-
 //---------path模块-----
 //1.路径的解析
 var path=require('path');
@@ -288,20 +274,20 @@ var fs=require('fs');
 // fs.watch返回一个fs.FSWatcher对象，拥有一个close方法，用于停止watch操作；
 // 当fs.watch有文件变化时，会触发fs.FSWatcher对象的change(err, filename)事件，err错误对象，filename发生变化的文件名
 // fs.watch(filename, [options], [listener]);
-var fsWatcher=fs.watch(__dirname+'/input.txt',{interval:1000},function(event,filename){
-    console.log(event);
-});
-fsWatcher.on('change',function(event,filename){
-    console.log(filename+' 发生变化')
-});
-setTimeout(function(){
-    console.log('关闭watch')
-    fsWatcher.close(function(err){
-        if(err){
-            console.log(err)
-        } 
-    });
-},30000)
+// var fsWatcher=fs.watch(__dirname+'/input.txt',function(event,filename){
+//     // console.log(event);
+// });
+// fsWatcher.on('change',function(event,filename){
+//     console.log(filename+' 发生变化')
+// });
+// setTimeout(function(){
+//     console.log('关闭watch')
+//     fsWatcher.close(function(err){
+//         if(err){
+//             console.log(err)
+//         } 
+//     });
+// },30000)
 
 
 
