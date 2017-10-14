@@ -18,7 +18,21 @@
 // eventEmitter.emit('connection');
 // console.log('程序执行完毕！');
 
+//-----------回调函数-----------
+// var fs=require('fs');  //加载node的fs模块，文件系统
+// var data=fs.readFileSync('input.txt');      //读取文件内容
+// console.log(data.toString());
+// console.log('程序执行结束！');
 
+// 异步
+// var fs=require('fs');
+// fs.readFile(__dirname+'/input.txt',function(err,data){
+//     if(err) return console.error(err);
+//     console.log(data.toString());
+// });
+// console.log("程序执行结束！");
+
+//--------EventEmitter类应用-----
 //引入事件模块
 // var events = require('events');
 // //实例化一个EventEmitter对象

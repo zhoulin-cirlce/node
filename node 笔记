@@ -18,3 +18,12 @@ REPL:
 	.load filename  载入当前的Node REPL会话的文件内容
 fs文件系统模块：path模块，学习： http://www.jianshu.com/p/5683c8a93511  示例：mainfs.js
 
+事件循环：有点类似于观察者模式，事件相当于一个主题(Subject)，而所有注册到这个事件上的处理函数相当于观察者(Observer)
+  1.通过events模块的EventEmitter()创建事件对象， var eventEmitter=new events.EventEmitter();
+  2.用on绑定事件处理程序， eventEmitter.on('事件名',[callback])
+  3.用emit触发事件，   eventEmitter.emit('事件名')
+Node.js里面的许多对象都会分发事件：一个net.Server对象会在每次有新连接时分发一个事件， 一个fs.readStream对象会在文件被打开的时候发出一个事件。 所有这些产生事件的对象都是 events.EventEmitter 的实例
+事件的异步：EventListener 会按照监听器注册的顺序同步地调用所有监听器。 所以需要确保事件的正确排序且避免竞争条件或逻辑错误。 监听器函数可以使用 setImmediate() 或 process.nextTick() 方法切换到异步操作模式
+  
+
+

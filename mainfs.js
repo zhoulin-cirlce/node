@@ -1,17 +1,3 @@
-//-----------回调函数-----------
-// var fs=require('fs');  //加载node的fs模块，文件系统
-// var data=fs.readFileSync('input.txt');      //读取文件内容
-// console.log(data.toString());
-// console.log('程序执行结束！');
-
-//异步
-// var fs=require('fs');
-// fs.readFile('input.txt',function(err,data){
-//     if(err) return console.error(err);
-//     console.log(data.toString());
-// });
-// console.log("程序执行结束！");
-
 //---------path模块-----
 //1.路径的解析
 var path=require('path');
@@ -212,11 +198,96 @@ var fs=require('fs');
 // })
 
 //11.查看文件与目录是否存在  fs.exists(path,[callback(exists)])  //exists为true是存在
-fs.exists(__dirname+'/input.txt',function(exists){
-    var retTxt=(exists ? '存在': '不存在')
-    console.log(retTxt);
-})
+// fs.exists(__dirname+'/input.txt',function(exists){
+//     var retTxt=(exists ? '存在': '不存在')
+//     console.log(retTxt);
+// })
 
+//12.修改文件访问时间与修改时间 fs.utimes(path,atime,mtime,callback);
+//atime:新的访问时间 ctime新的修改时间
+// fs.stat(__dirname+'/input.txt',function(err,stat){
+//         console.log('访问时间：'+stat.atime+'\n修改时间：'+stat.mtime);  //修改之前最近的一次时间
+//         console.log(stat.mode);
+//     })
+// fs.utimes(__dirname+'/input.txt',new Date(),new Date(),function(err){
+//     if(err){
+//         console.error(err);
+//         return ;
+//     }
+//     fs.stat(__dirname+'/input.txt',function(err,stat){
+//         console.log('访问时间：'+stat.atime+'\n修改时间：'+stat.mtime);  //修改之后的时间
+//         console.log(stat.mode);
+//     })
+// })
+
+//13.修改文件的访问权限 fs.chmod(path,mode,callback)
+//mode表示权限，0666是所有用户可读可写
+// fs.chmod(__dirname+'/input.txt','0666',function(err){
+//     if(err){
+//         console.error(err);
+//         return ;
+//     }
+//     console.log('修改权限成功')
+// })
+
+//14.移动/重命名文件或目录 fs.rename(oldPath,newPath,callback);
+// fs.rename(__dirname+'/input.txt',__dirname+'/input1.txt',function(err){
+//     if(err){
+//         console.error(err);
+//         return ;
+//     }else{
+//         console.log('移动/重命名文件成功！');
+//     }
+// })
+
+//15.删除空目录(无子文件)
+// fs.rmdir(__dirname+'/test',function(err){
+//     if(err){
+//         console.log('删除空目录失败，可能原因：1、目录不存在，2、目录不为空');
+//         console.error(err);
+//         return ;
+//     }else{
+//         console.log('删除目录成功')
+//     }
+// })
+
+//16.监视文件，被修改时进行处理 fs.watchFile(filename,[options],listener);
+//[options], persistent true表示持续监视，不退出程序；interval 单位毫秒，表示每隔多少毫秒监视一次文件
+//listener ,文件发生变化时回调，有两个参数：curr为被修改后文件一个fs.Stat对象，prev为被修改前文件一个fs.Stat对象
+// fs.watchFile(__dirname+'/input.txt',{interval:1000},function(curr,prev){
+//     if(Date.parse(prev.ctime)==0){
+//         console.log('文件被创建！');
+//     }else if(Date.parse(curr.ctime)==0){
+//         console.log('文件被删除！');
+//     }else if(Date.parse(curr.mtime)!=Date.parse(prev.mtime)){
+//         console.log('文件被修改！');
+//     }
+// })
+
+//17.取消监听文件 fs.unwatchFile(filename,[listener]); //listener如果不指定监听器事件，则取消所有监听处理事件
+// var listener=function(curr,prev){
+//     console.log('我是监视函数')
+// }
+// fs.unwatchFile(__dirname+'/input.txt',listener);
+
+//18.监视文件或目录 fs.watch(filename,[options],[listener])
+// fs.watch返回一个fs.FSWatcher对象，拥有一个close方法，用于停止watch操作；
+// 当fs.watch有文件变化时，会触发fs.FSWatcher对象的change(err, filename)事件，err错误对象，filename发生变化的文件名
+// fs.watch(filename, [options], [listener]);
+// var fsWatcher=fs.watch(__dirname+'/input.txt',function(event,filename){
+//     // console.log(event);
+// });
+// fsWatcher.on('change',function(event,filename){
+//     console.log(filename+' 发生变化')
+// });
+// setTimeout(function(){
+//     console.log('关闭watch')
+//     fsWatcher.close(function(err){
+//         if(err){
+//             console.log(err)
+//         } 
+//     });
+// },30000)
 
 
 
