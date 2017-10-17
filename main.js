@@ -18,7 +18,21 @@
 // eventEmitter.emit('connection');
 // console.log('程序执行完毕！');
 
+//-----------回调函数-----------
+// var fs=require('fs');  //加载node的fs模块，文件系统
+// var data=fs.readFileSync('input.txt');      //读取文件内容
+// console.log(data.toString());
+// console.log('程序执行结束！');
 
+// 异步
+// var fs=require('fs');
+// fs.readFile(__dirname+'/input.txt',function(err,data){
+//     if(err) return console.error(err);
+//     console.log(data.toString());
+// });
+// console.log("程序执行结束！");
+
+//--------EventEmitter类应用-----
 //引入事件模块
 // var events = require('events');
 // //实例化一个EventEmitter对象
@@ -52,19 +66,27 @@
 // console.log('程序执行完毕！')
 
 
-//-----------回调函数-----------
-// var fs=require('fs');  //加载node的fs模块，文件系统
-// var data=fs.readFileSync('input.txt');      //读取文件内容
-// console.log(data.toString());
-// console.log('程序执行结束！');
+//--------------------缓冲区Buffer-----------
+// var buf=new Buffer(256);  //新建一人256字节长度的缓冲区
+// len=buf.write('www.runbot');
+// console.log("写入字节数："+len)
 
-// 异步
-// var fs=require('fs');
-// fs.readFile(__dirname+'/input.txt',function(err,data){
-//     if(err) return console.error(err);
-//     console.log(data.toString());
-// });
-// console.log("程序执行结束！");
+//显示编码转换
+// buf=new Buffer(26);
+// for(var i=0; i<26; i++){
+//     buf[i]=i+97;  //ASCII码算出buf为26个小写字母
+// }
+// console.log(buf.toString('ascii'));  //指定展示类型
+// console.log(buf.toString('ascii',0,5)); //索引为0-5
+// console.log(buf.toString('utf8',0,5));
+// console.log(buf.toString(undefined,0,5)); //undefined默认使用utf8编码
+//转为JSON
+// buf.toJSON(buf);
+//缓冲区合并
+// var buf1=new Buffer('测试');
+// var buf2=new Buffer('连接合并');
+// var buf3=Buffer.concat([buf1,buf2]);
+// console.log(buf3.toString());
 
 //-----------------Stream流----------
 //流的四种类型 Readable(可读) , Writable(可写) , Duplex(可读可写) , Transform(操作写入数据再读出结果)
@@ -113,3 +135,4 @@ var zlib=require('zlib');
 // fs.createReadStream('input.txt').pipe(zlib.createGzip()).pipe(fs.createWriteStream('input.txt.gz'));
 //文件解压
 fs.createReadStream('input.txt.gz').pipe(zlib.createGzip()).pipe(fs.createWriteStream('input.txt'));
+
