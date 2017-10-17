@@ -138,40 +138,41 @@
 
 
 //--------------------------模块---------
-var fs=require('fs');
-var hello="function Hello(){\
-    this.say=function(name){\
-        console.log('hello '+name+' !');\
-    }\
-}\
-module.exports=Hello;";
-fs.readFile(__dirname+'/hello.js',function(){
-    fs.open(__dirname+'/hello.js','a',function(err,fd){
-        fs.writeFile(__dirname+'/hello.js',hello,function(err){
-            if(err){
-                console.error(err);
-            }else{
-                console.log('写入成功！')
-            }
-        });
-    });
-});
-var main="var Hello=require('./hello.js');\
-var hello=new Hello();\
-hello.say('zhoulin');\
-";
-fs.readFile(__dirname+'/hellomain.js',function(){
-    fs.open(__dirname+'/hellomain.js','a',function(){
-        fs.writeFile(__dirname+'/hellomain.js',main,function(err){
-            if(err){
-                console.error(err);
-            }else{
-                console.log('写入成功')
-            }
-        })
-    })
-})
+// var fs=require('fs');
+// var hello="function Hello(){\
+//     this.say=function(name){\
+//         console.log('hello '+name+' !');\
+//     }\
+// }\
+// module.exports=Hello;";
+// fs.readFile(__dirname+'/hello.js',function(){
+//     fs.open(__dirname+'/hello.js','a',function(err,fd){
+//         fs.writeFile(__dirname+'/hello.js',hello,function(err){
+//             if(err){
+//                 console.error(err);
+//             }else{
+//                 console.log('写入成功！')
+//             }
+//         });
+//     });
+// });
+// var main="var Hello=require('./hello.js');\
+// var hello=new Hello();\
+// hello.say('zhoulin');\
+// ";
+// fs.readFile(__dirname+'/hellomain.js',function(){
+//     fs.open(__dirname+'/hellomain.js','a',function(){
+//         fs.writeFile(__dirname+'/hellomain.js',main,function(err){
+//             if(err){
+//                 console.error(err);
+//             }else{
+//                 console.log('写入成功')
+//             }
+//         })
+//     })
+// })
 
+//---------------------路由-----------
 
 
 

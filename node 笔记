@@ -28,6 +28,33 @@ Node.js里面的许多对象都会分发事件：一个net.Server对象会在每
 node模块系统：
 1.require的加载优先级：1.先看是否在模块缓存区中 --是(---导出)否--->2.是否是原生模块--是(查找原生模块--缓存--导出)--否-->3.查找文件--根据扩展名载入模块--缓存--导出
 2.模块导出：module.exports=Hello;
-  
 
+url模块：
+1.url.parse('http://www.baidu.com') 传入一个url地址，返回一个对象，解析这个url.内容为：
+   href: 所解析的完整原始 URL。协议名和主机名都已转为小写 
+   protocol: 请求协议，小写 
+   host: URL主机名已全部转换成小写, 包括端口信息 
+   auth:URL中身份验证信息部分 
+   hostname:主机的主机名部分, 已转换成小写 
+   port: 主机的端口号部分 
+   pathname: URL的路径部分,位于主机名之后请求查询之前 
+   search: URL 的“查询字符串”部分，包括开头的问号 
+   path: pathname 和 search 连在一起 
+   query: 查询字符串中的参数部分（问号后面部分字符串） 
+   hash: URL 的 “#” 后面部分（包括 # 符号)
+
+querystring模块：
+1.querystring.parse(str,separator,eq,options);  //str需要反序列的字符串，separator分割符，一般为&，eq用于作健与值的划分，一般为'=',options是一个对象有两个属性，maxKeys解析键值对的最大值，另一个decodeURIComponent。
+  例：querystring.parse("name=wite&sex=man&sex=women");
+	//return:  {name:'wite',sex:['man','women']};
+      querystring.parse("name=wite#sex=man#sex=women",'#',null,{maxKeys:2});
+	//return:  {name:'wite',sex:'man'}
+
+2.querystring.stringify(obj,separator,eq,options)  将对象进行序列化，与parse()相对。
+  例：querystring.stringify({name:'wite',sex:['man','women']});
+      //return:  "name=wite&sex=man&sex=women"
+      querystring.stringify({name:'wite',sex:['man','women']},"*","$");
+      //return:  "name$wite*sex$man*sex$women"
+3.querystring.escapa(str) 编码
+4.querystring.unescapa(str) 解码
 
