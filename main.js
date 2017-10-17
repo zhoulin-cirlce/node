@@ -96,7 +96,7 @@
 //3. error 在接收和写入过程中出错时
 //4. finish 所有数据已被写入到底层系统时触发
 //实例1：从流中读取数据
-var fs=require('fs')
+// var fs=require('fs')
 // var data=''
 // var readerStream=fs.createReadStream('input.txt');
 // readerStream.setEncoding('UTF8');
@@ -130,9 +130,49 @@ var fs=require('fs')
 // console.log('程序执行结束！')
 
 //实例4：链式流：将输出流到另一个流并创建多个对个流的操作，如压缩和解压文件。
-var zlib=require('zlib'); 
+// var zlib=require('zlib'); 
 //文件压缩
 // fs.createReadStream('input.txt').pipe(zlib.createGzip()).pipe(fs.createWriteStream('input.txt.gz'));
 //文件解压
-fs.createReadStream('input.txt.gz').pipe(zlib.createGzip()).pipe(fs.createWriteStream('input.txt'));
+// fs.createReadStream('input.txt.gz').pipe(zlib.createGzip()).pipe(fs.createWriteStream('input.txt'));
+
+
+//--------------------------模块---------
+var fs=require('fs');
+var hello="function Hello(){\
+    this.say=function(name){\
+        console.log('hello '+name+' !');\
+    }\
+}\
+module.exports=Hello;";
+fs.readFile(__dirname+'/hello.js',function(){
+    fs.open(__dirname+'/hello.js','a',function(err,fd){
+        fs.writeFile(__dirname+'/hello.js',hello,function(err){
+            if(err){
+                console.error(err);
+            }else{
+                console.log('写入成功！')
+            }
+        });
+    });
+});
+var main="var Hello=require('./hello.js');\
+var hello=new Hello();\
+hello.say('zhoulin');\
+";
+fs.readFile(__dirname+'/hellomain.js',function(){
+    fs.open(__dirname+'/hellomain.js','a',function(){
+        fs.writeFile(__dirname+'/hellomain.js',main,function(err){
+            if(err){
+                console.error(err);
+            }else{
+                console.log('写入成功')
+            }
+        })
+    })
+})
+
+
+
+
 
