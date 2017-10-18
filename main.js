@@ -172,8 +172,33 @@
 //     })
 // })
 
-//---------------------路由-----------
+//---------------------路由见router文件-----------
 
+//-----------------全局变量----------------------
 
+//1.__filename 当前正在执行的脚本文件名
+// console.log(__filename)
+//2.__dirname  当前正在执行的脚本目录，不包括当前文件名
+// console.log(__dirname);
+//3.定时，清定时，间隔调用函数
+//4.console
+//5.process 用于描述node进程状态的对象,process有很多属性和方法，详见API
+    process.on('exit',function(code){  //code为退出码
+        setTimeout(function(){  //计时在退出事件中永不会执行
+            console.log('计时')
+        },0);
+        console.log('退出',code)
+    });
+    console.log('执行结束')
+    process.stdout.write('hello world');
+    process.argv.forEach(function(val,index,array){
+        console.log(index+':'+val);
+    });
+    console.log(process.execPath); //脚本绝对路径
+    console.log(process.platform); //程序所在的平台系统
+    console.log(process.pid);//进程号
+    console.log('当前目录：'+process.cwd()); 
+    console.log('当前版本:'+process.version);
+    console.log(process.memoryUsage());//内存使用情况
 
 
