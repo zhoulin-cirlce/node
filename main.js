@@ -183,22 +183,113 @@
 //3.定时，清定时，间隔调用函数
 //4.console
 //5.process 用于描述node进程状态的对象,process有很多属性和方法，详见API
-    process.on('exit',function(code){  //code为退出码
-        setTimeout(function(){  //计时在退出事件中永不会执行
-            console.log('计时')
-        },0);
-        console.log('退出',code)
-    });
-    console.log('执行结束')
-    process.stdout.write('hello world');
-    process.argv.forEach(function(val,index,array){
-        console.log(index+':'+val);
-    });
-    console.log(process.execPath); //脚本绝对路径
-    console.log(process.platform); //程序所在的平台系统
-    console.log(process.pid);//进程号
-    console.log('当前目录：'+process.cwd()); 
-    console.log('当前版本:'+process.version);
-    console.log(process.memoryUsage());//内存使用情况
+    // process.on('exit',function(code){  //code为退出码
+    //     setTimeout(function(){  //计时在退出事件中永不会执行
+    //         console.log('计时')
+    //     },0);
+    //     console.log('退出',code)
+    // });
+    // console.log('执行结束')
+    // process.stdout.write('hello world');
+    // process.argv.forEach(function(val,index,array){
+    //     console.log(index+':'+val);
+    // });
+    // console.log(process.execPath); //脚本绝对路径
+    // console.log(process.platform); //程序所在的平台系统
+    // console.log(process.pid);//进程号
+    // console.log('当前目录：'+process.cwd()); 
+    // console.log('当前版本:'+process.version);
+    // console.log(process.memoryUsage());//内存使用情况
+
+//--------------常用工具util介绍-------
+//1.util
+//util.inherits(constructor,superConstructor) 实现对象之间原型的继承
+    // var util=require('util');
+    // function Base(){
+    //     this.name='base';
+    //     this.sayhi=function(){
+    //         console.log('hi '+this.name);
+    //     }
+    // }
+    // Base.prototype.sayhello=function(){
+    //     console.log('hello '+this.name);
+    // }
+    // function Sub(){
+    //     this.name='sub';
+    // }
+    // util.inherits(Sub,Base);
+    // var base=new Base();
+    // console.log(base.name);
+    // base.sayhi();
+    // var sub=new Sub();
+    // console.log(sub.name);
+    // sub.sayhello();
+    // sub.sayhi();  //只会继承原型，故此报错
+
+//util.inspect(obj,showHidden,depth,colors) 将对象转为字符串
+// var person={
+//     name:'keyue',
+//     age:23,
+//     like:function(){
+//         return 'play';
+//     }
+// };
+// console.log(util.inspect(person));
+
+//---------------常用模块-----------
+//1.os模块，基本的系统操作
+    // var os=require('os');
+    // console.log(os.hostname());//操作系统主机名
+    // console.log(os.type());//操作系统名
+    // console.log(os.totalmem());//系统内存总量
+    // console.log(os.freemem());//系统空闲内存
+//2.Net模块提供了一些用于底层的网络通信的小工具，包含了创建服务器/客户端的方法
+    //示例参考Net文件
 
 
+
+
+
+
+
+//-------------GET/POST请求------------
+//1.获取GET请求内容，因为暴露在url中，所以直接解析url
+    // var http=require('http');
+    // var url=require('url');
+    // var util=require('util');
+    // http.createServer(function(req,res){
+    //     res.writeHead(200,{'Conten-Type':'text-plain'});
+    //     res.end(util.inspect(url.parse(req.url)));
+
+    // }).listen(8000);
+//2.获取post请求数据
+    // var http=require('http');
+    // var querystring=require('querystring');
+    // var postHtml='<html><head><meta charset="utf-8"><title>菜鸟教程 Node.js 实例</title></head>' +
+    //   '<body>' +
+    //   '<form method="post">' +
+    //   '网站名： <input name="name"><br>' +
+    //   '网站 URL： <input name="url"><br>' +
+    //   '<input type="submit">' +
+    //   '</form>' +
+    //   '</body></html>';
+    // http.createServer(function(req,res){
+    //     var body='';
+    //     req.on('data',function(chunk){ //可读流中有data事件，有数据可读时触发,chunk是数据片段
+            
+    //         body+=chunk;
+    //     });
+    //     req.on('end',function(){
+    //        body=querystring.parse(body); //将字符串反序列化解析为对象
+    //        res.writeHead(200,{'Content-Type':'text/html;charset=utf8'});  //以html格式的正文，plain是无格式
+    //        if(body.name&&body.url){
+    //            res.write('网站名为：'+body.name);
+
+    //            res.write('网站地址：'+body.url);
+    //        }else{
+    //            res.write(postHtml);
+    //        } 
+    //        res.end();
+    //     })
+        
+    // }).listen(8000);
