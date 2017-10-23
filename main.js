@@ -245,8 +245,47 @@
     // console.log(os.freemem());//系统空闲内存
 //2.Net模块提供了一些用于底层的网络通信的小工具，包含了创建服务器/客户端的方法
     //示例参考Net文件
+//3.Path模块主要是用来处理和转换文件路的工具，也可监听文件。参考mainfs.js
+//4.DNS模块，用于解析域名。
+    // var dns=require('dns');
+    // dns.lookup('www.github.com',function(err,address,family){
+    //     console.log('ip ：',address);   //address的值为github的ip访问地址；
+    //     dns.reverse(address,function(err,hostnames){
+    //          console.log(hostnames);
+    //     })
+    // });
+    
+//5.domain模块，简化异步代码的异常处理，可以捕抓到try catch无法捕获到的
+    // var EventEmitter=require('events').EventEmitter;
+    // var domain=require('domain');
+    // var emitter1=new EventEmitter();
+    // var domain1=domain.create();
+    // domain1.on('error',function(err){
+    //     console.log("domamin1 处理这个错误："+err.message);
+    // });
+    // //显示声明
+    // domain1.add(emitter1);
+    // emitter1.on('error',function(err){
+    //     console.log("监听处理此错误:"+err.message);
+    // });
+    // emitter1.emit('error',new Error('通过监听器来处理'));
+    // emitter1.removeAllListeners('error');
+    // emitter1.emit('error',new Error('----通过 domain1 处理'));
 
-
+    // var domain2=domain.create();
+    // domain2.on('error',function(err){
+    //     console.log('domain2 处理这个错误:'+err.message);
+    // });
+    // //隐式声明
+    // domain2.run(function(){
+    //     var emitter2=new EventEmitter();
+    //     emitter2.emit('error',new Error('通过 domain2 处理'));
+    // });
+    // domain1.remove(emitter1);
+    // emitter1.emit('error',new Error('转换为异常，系统将崩溃！'));
+    //domain总结：1.用domain绑定监听器后，如果事件监听器有绑定error事件，则错误会执行事件中的error事件，没有绑定则会
+    //执行domain中绑定的error事件。2.如果监听器和domain都没有绑定error事件，则错误会直接抛异常，断开连接。3.domain的
+    //绑定分显示add()方法，和隐示绑定run()
 
 
 
