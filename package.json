@@ -7,10 +7,8 @@
     "node": ">=4.2.0",
     "npm": "^3.0.0"
   },
-  "scripts": {
-  },
-  "betterScripts": {
-  },
+  "scripts": {},
+  "betterScripts": {},
   "repository": {
     "type": "git",
     "url": "git@https://github.com/zhoulin-cirlce/node.git"
@@ -18,9 +16,7 @@
   "author": "珂玥",
   "license": "MIT",
   "dependencies": {
-   
+    "express": "^4.16.2"
   },
-  "devDependencies": {
-   
-  }
+  "devDependencies": {}
 }
