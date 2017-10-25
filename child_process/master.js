@@ -19,17 +19,25 @@ for(var i=0;i<3;i++){
     //     console.log('子进程已退出，退出码：'+code);
     // });
 
-    //2.child_process.spawn(conmmand,[args],options); 使用指定命令行参数创建新进程
-    //command 将要运行的命令
-    //args: Array字符串参数数组，options 对象
-    var workerProcess=child_process.spawn('node',['support.js',i]);
-    workerProcess.stdout.on('data',function(data){
-        console.log('stdout:'+data);
-    });
-    workerProcess.stderr.on('data',function(data){
-        console.log('stderr:'+stderr);
-    });
+    // //2.child_process.spawn(conmmand,[args],options); 使用指定命令行参数创建新进程
+    // //command 将要运行的命令
+    // //args: Array字符串参数数组，options 对象
+    // var workerProcess=child_process.spawn('node',['support.js',i]);
+    // workerProcess.stdout.on('data',function(data){
+    //     console.log('stdout:'+data);
+    // });
+    // workerProcess.stderr.on('data',function(data){
+    //     console.log('stderr:'+stderr);
+    // });
+    // workerProcess.on('close',function(code){
+    //     console.log('子进程已退出，退出码：'+code);
+    // });
+
+    //3.child_process.fork(modulePath,[args],options); 是spawn的特殊形式，创建子进程
+    //modulePath: String ,将要在子进程中运行的模块
+    //args: Array字符串参数数组
+    var workerProcess=child_process.fork('support.js',[i]);
     workerProcess.on('close',function(code){
         console.log('子进程已退出，退出码：'+code);
-    })
+    });
 }
