@@ -19,4 +19,17 @@ for(var i=0;i<3;i++){
     //     console.log('子进程已退出，退出码：'+code);
     // });
 
+    //2.child_process.spawn(conmmand,[args],options); 使用指定命令行参数创建新进程
+    //command 将要运行的命令
+    //args: Array字符串参数数组，options 对象
+    var workerProcess=child_process.spawn('node',['support.js',i]);
+    workerProcess.stdout.on('data',function(data){
+        console.log('stdout:'+data);
+    });
+    workerProcess.stderr.on('data',function(data){
+        console.log('stderr:'+stderr);
+    });
+    workerProcess.on('close',function(code){
+        console.log('子进程已退出，退出码：'+code);
+    })
 }
