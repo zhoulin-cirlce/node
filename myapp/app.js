@@ -14,10 +14,15 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('view engine', 'jade');
 //将 jade模板改为 html
 // app.engine('html',ejs.__express);
 // app.set('view engine','html');
+
+// 使用html与underscore混合模板
+var cons=require('consolidate');
+app.engine('html',cons.underscore);
+app.set('view engine','html');
 
 app.use(favicon());
 app.use(logger('dev'));

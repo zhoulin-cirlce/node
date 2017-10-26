@@ -7,25 +7,6 @@ router.get('/', function(req, res) {
 });
 
 module.exports = router;
-// exports.index = function(req, res){
-//   var mongoose = require('../node_modules/mongoose'); 
-
-//   var db = mongoose.createConnection('localhost', 'test');
-
-//   var schema = mongoose.Schema({ name: 'string' }); 
-//   var User = db.model('User', schema);
-
-//   var kitty = new User({ name: 'Zildjian' }); 
-//   kitty.save(function (err) {
-//     if (err) // ...
-//     res.end('meow');
-//   }); 
-
-
-//   User.find({'name':'Zildjian'},function(err,docs){  
-//     res.render('index', { title: docs});
-//   }); 
-// };
 var MongoClient = require('mongodb').MongoClient;
 var DB_CONN_STR = 'mongodb://localhost:27017/test'; // 数据库为 test
  
