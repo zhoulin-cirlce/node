@@ -340,3 +340,36 @@
     // DELETE：用于删除数据
     // POST：用于添加数据
     //示例详见Restful.js
+
+//---------------连接MongoDB------
+var MongoClient=require('mongodb').MongoClient;
+var DB_CONN_STR="mongodb://localhost:27017/runoob";
+var insertData=function(db,callback){
+    console.log(db)
+    var collection=db.collection('site');
+    var data=[{"name":"keyue","age":23},
+    {"name":"circle","age":18},
+    {"name":"zhouzhou","age":22}
+    ];
+    collection.insert(data,function(err,result){
+        if(err){
+            console.log('Error:'+err);
+            return ;
+        }
+        callback(result);
+    });
+}
+    MongoClient.connect(DB_CONN_STR,function(err,db){
+        if(err){
+            console.log('--err---',err)
+        }
+        console.log('连接成功',db);
+        insertData(db,function(result){
+            console.log(result);
+            db.close();
+        });
+    });
+
+
+
+

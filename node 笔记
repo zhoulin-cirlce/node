@@ -58,3 +58,10 @@ querystring模块：
 3.querystring.escapa(str) 编码
 4.querystring.unescapa(str) 解码
 
+使用express构建项目：
+1.安装express
+2. 命令： express myapp
+3.装依赖
+4.根据返回的 run命令启动项目,也可看package.json中scripts里的命令（如：nodejs ./bin/www）
+5.node连接mongodb: http://www.cnblogs.com/paul123/p/5396290.html
+
