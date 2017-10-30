@@ -21,8 +21,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 // 使用html与underscore混合模板
 var cons=require('consolidate');
-app.engine('html',cons.underscore);
-app.set('view engine','html');
+var exphbs=require('express-handlebars');
+var hbs=require('hbs');
+app.engine('hbs', exphbs({
+  layoutsDir: 'views',
+  defaultLayout: 'layout',
+  extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
 
 app.use(favicon());
 app.use(logger('dev'));
