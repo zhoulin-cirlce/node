@@ -1,10 +1,17 @@
 var express = require('express');
 var router = express.Router();
-
+var demopost=require('./../lib/demo')
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express',author:'circle'});
-});
+router.get('/',demopost.findAll);
+//创建
+router.get('/user',demopost.insert);
+//详情
+router.get('/user:id',demopost.getById);
+//删除
+router.get('/user:id/remove',demopost.remove);
+//修改
+router.get('/user:id/update',demopost.update);
+
 
 module.exports = router;
 var MongoClient = require('mongodb').MongoClient;
@@ -14,7 +21,7 @@ var insertData = function(db, callback) {
     //连接到表 site
     var collection = db.collection('site');
     //插入数据
-    var data = [{"name":"菜鸟教程","url":"www.runoob.com"},{"name":"菜鸟工具","url":"c.runoob.com"}];
+    var data = [{"name":"baidu","url":"www.baidu.com"},{"name":"hao123","url":"www.hao123.com"}];
     collection.insert(data, function(err, result) { 
         if(err)
         {
