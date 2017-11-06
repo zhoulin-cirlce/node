@@ -28,6 +28,8 @@ Node.js里面的许多对象都会分发事件：一个net.Server对象会在每
 node模块系统：
 1.require的加载优先级：1.先看是否在模块缓存区中 --是(---导出)否--->2.是否是原生模块--是(查找原生模块--缓存--导出)--否-->3.查找文件--根据扩展名载入模块--缓存--导出
 2.模块导出：module.exports=Hello;
+Module按路径查找，依次查找上一级node_module,直到根目录：如果在 '/home/ry/foo.js' 文件里调用了require('bar.js')，则 Node.js 会按以下顺序查找:
+	查找顺序为：1.home/ry/node_module/bar.js  2.home/node_module/bar.js  3. node_module/bar.js
 
 url模块：
 1.url.parse('http://www.baidu.com') 传入一个url地址，返回一个对象，解析这个url.内容为：
@@ -64,4 +66,8 @@ querystring模块：
 3.装依赖
 4.根据返回的 run命令启动项目,也可看package.json中scripts里的命令（如：nodejs ./bin/www）
 5.node连接mongodb: http://www.cnblogs.com/paul123/p/5396290.html
+
+
+
+
 
