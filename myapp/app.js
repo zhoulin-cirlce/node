@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var ejs =require('ejs');
 var mongoose=require('mongoose');
+var fs=require('fs');
 mongoose.connect('mongodb://localhost/test');
 var app = express();
 
@@ -19,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 // app.engine('html',ejs.__express);
 // app.set('view engine','html');
 
-// 使用html与underscore混合模板
+// 使用handlebars模板
 var cons=require('consolidate');
 var exphbs=require('express-handlebars');
 var hbs=require('hbs');
