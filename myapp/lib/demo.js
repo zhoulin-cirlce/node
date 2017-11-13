@@ -23,6 +23,7 @@
     // });
 // });
 
+//建立与数据库的连接
 var mongoose=require("mongoose");
 mongoose.connect("mongodb://localhost:27017/test")
 var db = mongoose.connection;

@@ -13,7 +13,7 @@ var fs=require('fs');
 mongoose.connect('mongodb://localhost/test');
 var app = express();
 
-// view engine setup
+// 设置视图模块目录
 app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 //将 jade模板改为 html
@@ -36,15 +36,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+//设置静态资源目录
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
 
-/// catch 404 and forwarding to error handler
+/// 捕获404页面
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
+    res.status(404).send('Sorry Not Found!')
     next(err);
 });
 
