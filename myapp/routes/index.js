@@ -4,13 +4,13 @@ var demopost=require('./../lib/demo')
 /* GET home page. */
 router.get('/',demopost.findAll);
 //创建
-router.get('/user',demopost.insert);
+router.get('/users',demopost.insert);
 //详情
-router.get('/user:id',demopost.getById);
+router.get('/users:id',demopost.getById);
 //删除
-router.get('/user:id/remove',demopost.remove);
+router.get('/users:id/remove',demopost.remove);
 //修改
-router.get('/user:id/update',demopost.update);
+router.get('/users:id/update',demopost.update);
 
 
 module.exports = router;
