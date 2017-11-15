@@ -25,15 +25,21 @@
 
 //建立与数据库的连接
 var mongoose = require("mongoose");
+var Kitten = require('./mongo/users');
 mongoose.connect("mongodb://localhost:27017/test")
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
     console.log("已连接！")
 });
-
 //查看
 module.exports.findAll = function (req, res, next) {
+    //数据库测试----
+    var silence = new Kitten({ name: 'Silence' });
+    console.log(silence.name);
+    var fluffy = new Kitten({ name: "fluffy" ,age:"18"});
+    fluffy.speak();    // "Meow name is fluffy"
+    //----test--
     var data = [{ "name": "周麟", "url": "www.baidu.com" }, { "name": "珂玥", "url": "www.hao123.com" }];
     db.collection('site').insert(data)
     db.collection('site').update({ "name": "周麟" }, { $set: { "url": "www.zk.com" } }, { multi: true })
