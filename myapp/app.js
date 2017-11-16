@@ -11,7 +11,7 @@ var users = require('./routes/users');
 var ejs =require('ejs');
 var mongoose=require('mongoose');
 var fs=require('fs');
-mongoose.connect('mongodb://localhost/test');
+// mongoose.connect('mongodb://localhost/test');
 var app = express();
 
 // 设置视图模块目录
