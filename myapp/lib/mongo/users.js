@@ -45,24 +45,27 @@
 // //暴露出去的方法
 // module.exports = UsersSchema
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-//表里要存的字段与类型定义
-var KittySchema = new Schema({
- name:String,
- age:Number
-});
-//以methods来定义实例方法
-KittySchema.methods.speak = function(){
-    var greeting = this.name ? "Meow name is " + this.name : "I don't have a name.";
-    console.log(greeting);
-}
-KittySchema.methods.findAge=function(cb){
-    return this.model('Kitten').find({age:this.age},cb);
-}
 
-//以statics来定义静态方法,在model就能使用
 
-//参数一是表名,参数二是表模型
-var Kitten = mongoose.model("Kitten", KittySchema);
-module.exports=Kitten;
+
+// var mongoose = require('mongoose');
+// var Schema = mongoose.Schema;
+// //表里要存的字段与类型定义
+// var KittySchema = new Schema({
+//  name:String,
+//  age:Number
+// });
+// //以methods来定义实例方法
+// KittySchema.methods.speak = function(){
+//     var greeting = this.name ? "Meow name is " + this.name : "I don't have a name.";
+//     console.log(greeting);
+// }
+// KittySchema.methods.findAge=function(cb){
+//     return this.model('Kitten').find({age:this.age},cb);
+// }
+
+// //以statics来定义静态方法,在model就能使用
+
+// //参数一是表名,参数二是表模型
+// var Kitten = mongoose.model("Kitten", KittySchema);
+// module.exports=Kitten;

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var demopost=require('./../lib/demo')
+var demopost=require('./../lib/index')
 /* GET home page. */
 router.get('/',demopost.findAll);
 //创建

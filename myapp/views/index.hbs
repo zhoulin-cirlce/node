@@ -1,6 +1,12 @@
+  <div id="btn">
+    <p>{{title}}</p>
+    <p>用户名：{{author}}</p>
+    {{> header}}
+  </div>
 
-<div>
-  <p>{{title}}</p>
-  <p>用户名：{{author}}</p>
-  {{> header}}
-</div>
+  
+<script>
+  document.getElementById('btn').onclick=function(){
+    alert('is good!');
+  }
+</script>
