@@ -14,7 +14,7 @@ module.exports.findAll = function (req, res, next) {
 
     var data = [{ "name": "测试周麟", "url": "www.baidu.com" }, { "name": "测试珂玥", "url": "www.hao123.com" }];
     console.log(insertUser(data))
-    res.render('index', { title: 'tit', author: 'kk0' });
+    res.render('index', { title: 'tit', author: 'kk0123' });
 }
 //添加
 module.exports.insert = function (req, res, next) {
