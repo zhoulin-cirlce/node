@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, '/views'));
 //将 jade模板改为 html
 // app.engine('html',ejs.__express);
 // app.set('view engine','html');
-
+ 
 app.set('view cache',true);  //视图缓存在开发模式下禁用,在生产时启用,此处是显示的让视图缓存一直启用
 // 使用handlebars模板
 var cons=require('consolidate');
