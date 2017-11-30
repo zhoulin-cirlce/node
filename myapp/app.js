@@ -5,14 +5,15 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');//解析请求体
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var ejs =require('ejs');
 var mongoose=require('mongoose');
 var fs=require('fs');
+var session=require('express-session');
 // mongoose.connect('mongodb://localhost/test');
 var app = express();
+var routes=require('./routes');
+//路由
+routes(app);
 
 // 设置视图模块目录
 app.set('views', path.join(__dirname, '/views'));
@@ -44,16 +45,16 @@ app.use(cookieParser());
 //设置静态资源目录
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
 
-/// 捕获404页面
-app.use(function(req, res, next) {
-    res.status(404).send('Sorry Not Found!')
-    next(err);
-});
 
-/// error handlers
+//session会话存储基本配置,存储在服务端,返回浏览器的头信息中会带上 set-cookie 将 session id 写到浏览器 cookie 中.
+// app.user(session({
+//     secret: 'sessiontest',//与cookieParser中的一致
+//     resave: true,
+//     saveUninitialized:true
+// }));
+
+
 
 // development error handler
 // development only 开发模式 (检查错误)
