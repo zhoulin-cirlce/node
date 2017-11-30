@@ -1,8 +1,8 @@
 
 var insertUser=require('./module/insertUser');
 var removeUser=require('./module/removeUser');
-// var updateUser=require('./module/updateUser');
-// var findUser=require('./module/findUser');
+var updateUser=require('./module/updateUser');
+var findUser=require('./module/findUser');
 //查看
 module.exports.findAll = function (req, res, next) {
     //mongoose数据库测试----
