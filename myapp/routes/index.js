@@ -1,13 +1,6 @@
-// var express = require('express');
-// var router = express.Router();
 var demopost=require('./../lib/index')
-/* GET home page. */
-// router.get('/',demopost.findAll);
 
-
-
-// module.exports = router;
-
+//导出所有路由
 module.exports=function(app){
     app.get('/',demopost.findAll);
     app.use('/users', require('./users'));
