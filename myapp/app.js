@@ -14,7 +14,8 @@ var app = express();
 var routes=require('./routes');
 //路由
 routes(app);
-
+var ws=require('./websocket');
+ws(app);
 // 设置视图模块目录
 app.set('views', path.join(__dirname, '/views'));
 // app.set('view engine', 'jade');
