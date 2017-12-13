@@ -3,17 +3,29 @@
     <p>用户名：{{author}}</p>
     {{> header}}
   </div>
+  <input id="sendTxt" type="text" />
+  <button id="send">发送</button>
+  <div id="rec"></div>
 
   
 <script>
-  document.getElementById('btn').onclick=function(){
-    alert('is good!');
-  }
-  const socket=new WebSocket("ws://localhost:8000");
-    socket.addEventListener('onopen',function(event){
-        socket.send('hello Server!');
-    });
-    socket.addEventListener('onmessage',function(event){
+  var socket=new WebSocket("ws://echo.websocket.org/");
+    console.log('ws----',socket);
+    socket.onopen=function(){
+        //socket.send('hello Server!');
+        document.getElementById('rec').innerHTML='connected!';
+    };
+     socket.onclose=function(){
+        console.log('client close!!');
+    };
+    socket.onmessage=function(event){
         console.log('message form server',event.data);
-    })
+        document.getElementById('rec').innerHTML=event.data;
+    };
+    document.getElementById('send').onclick=function(){
+      var txt=document.getElementById('sendTxt').value;
+      console.log(txt)
+      socket.send(txt);
+    };
+    
 </script>
