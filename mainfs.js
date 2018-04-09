@@ -332,10 +332,10 @@ rs.on('end',function(){
 });
 rs.on('open',function(){
     console.log('open!');
-});
+})
 rs.on('close',function(){
     console.log('close!')
-})
+}) 
 
 
 
