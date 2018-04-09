@@ -5,17 +5,16 @@ var myPath=path.normalize(__dirname+'/input.txt');  //normalize()方法解析路
 // console.log(myPath);
 
 //2.路径的结合，合并，路径最后不会带目录分隔符
-var path1='path1', path2='path2//pp\\',path3='../path3';
-var myPath=path.join(path1,path2,path3);
-// console.log(myPath);  //   path1\path2\path3
+var myPath=path.join('path1', '/path2/aa', 'baz/asdf');
+// console.log(myPath);  //   path1/path2/aa/baz/asdf
 
-//3.获取绝对路径，只在当前运行目录下找。
-var myPath=path.resolve('input.txt');
-// console.log(myPath);  //  /opt/zhoulin/node/input.txt
+//3.在当前路径下生成绝对路径，只在当前运行目录下找。要求参数是字符串，可为多个参数
+var myPath=path.resolve('app/test/haha','../input.txt');
+// console.log(myPath);  //  /opt/zhoulin/node/app/test/input.txt
 
 //4.获取相对路径  path.relative(form,to)  返回基于from指定到to的相对路径
-var form='/opt/zhoulin/node/input.txt'; //form与to是绝对路径
-var to='/opt/zhoulin/ebook';
+var form='/zhoulin/Document/circle/node/input.txt'; //form与to是绝对路径
+var to='/zhoulin/Document/circle/node/myapp/bin/www';
 var _path=path.relative(form,to);
 // console.log(_path);      //  ../../ebook
 
@@ -38,6 +37,27 @@ var myPath=path.sep;
 //9.delimiter属性，返回操作系统目录分隔符，window是 ';' unix是 ':'
 var myPath=path.delimiter;
 // console.log(myPath);  //  :
+//10.parse()返回文件的详细路径信息对象
+var pathJson=path.parse('/zhoulin/Document/circle/node/input.txt');
+// console.log(pathJson)
+// {
+//     root:'/',
+//     dir:'/zhoulin/Document/circle/node',
+//     base:'input.txt',
+//     ext:'txt',
+//     name:'input'
+// }
+//11.format()通过json组合成路径，与parse()相反
+var myPath=path.format({
+    root:'/',
+    dir:'/zhouzhou/node',
+    base:'input.html'
+});
+//12.isAbsolute()判断是否为绝对路径，返回true/false
+var isabsolut=path.isAbsolute('/root/circle/input.txt');
+// console.log(isabsolut);
+
+
 
 
 
@@ -289,6 +309,33 @@ var fs=require('fs');
 //     });
 // },30000)
 
+//19.文件可读流fs.createReadStream(path[,options])
+//20.暂停pause()会使 flowing 模式的流停止触发 'data' 事件
+//21.恢复resume()会重新触发 'data' 事件, 将暂停模式切换到流动模式
+var rs=fs.createReadStream('out.txt',{
+    flags:'r',
+    encoding:'utf8',
+    autoClose:true,
+    highWaterMark:3, //每次读取3位
+    start:0, //默认从0开始
+    end:3 //读到下标到3的字符结束，0-3共4位
+});
+rs.on('data',function(data){
+    console.log(data);
+    rs.pause();  //暂停'data'触发
+});
+setTimeout(function(){
+    rs.resume(); //恢复'data'触发
+},5000)
+rs.on('end',function(){
+    console.log('over!');
+});
+rs.on('open',function(){
+    console.log('open!');
+});
+rs.on('close',function(){
+    console.log('close!')
+})
 
 
 
