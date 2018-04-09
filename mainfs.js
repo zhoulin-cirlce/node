@@ -312,30 +312,43 @@ var fs=require('fs');
 //19.文件可读流fs.createReadStream(path[,options])
 //20.暂停pause()会使 flowing 模式的流停止触发 'data' 事件
 //21.恢复resume()会重新触发 'data' 事件, 将暂停模式切换到流动模式
-var rs=fs.createReadStream('out.txt',{
-    flags:'r',
+// var rs=fs.createReadStream('out.txt',{
+//     flags:'r',
+//     encoding:'utf8',
+//     autoClose:true,
+//     highWaterMark:3, //每次读取3位
+//     start:0, //默认从0开始
+//     end:3 //读到下标到3的字符结束，0-3共4位
+// });
+// rs.on('data',function(data){
+//     console.log(data);
+//     rs.pause();  //暂停'data'触发
+// });
+// setTimeout(function(){
+//     rs.resume(); //恢复'data'触发
+// },5000)
+// rs.on('end',function(){
+//     console.log('over!');
+// });
+// rs.on('open',function(){
+//     console.log('open!');
+// })
+// rs.on('close',function(){
+//     console.log('close!')
+// }) 
+
+//22.文件写入流fs.createWriteStream(path[,options]);
+var ws=fs.createWriteStream('out.txt',{
+    flags:'w',  //如果不想覆盖式写入，则为 ‘r+’
     encoding:'utf8',
     autoClose:true,
-    highWaterMark:3, //每次读取3位
-    start:0, //默认从0开始
-    end:3 //读到下标到3的字符结束，0-3共4位
+    highWaterMark:6,
+    mode:0o666,  //权限
 });
-rs.on('data',function(data){
-    console.log(data);
-    rs.pause();  //暂停'data'触发
-});
-setTimeout(function(){
-    rs.resume(); //恢复'data'触发
-},5000)
-rs.on('end',function(){
-    console.log('over!');
-});
-rs.on('open',function(){
-    console.log('open!');
-})
-rs.on('close',function(){
-    console.log('close!')
-}) 
+var flag1=ws.write('hello','utf8',function(){ //返回flag1的值为true/false，代表是否还可以继续写入
+    console.log('写完！')
+});    
+console.log(flag1); //注：为false时，数据不会丢失，也会被写入
 
 
 
