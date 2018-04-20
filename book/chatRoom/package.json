@@ -1,0 +1,14 @@
+{
+  "name": "chatRooms",
+  "version": "1.0.0",
+  "description": "node时实聊天程序",
+  "scripts": {
+    "test": "npm run start"
+  },
+  "author": "circle",
+  "license": "ISC",
+  "dependencies": {
+    "mime": "^2.3.1",
+    "socket.io": "^2.1.0"
+  }
+}
