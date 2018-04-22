@@ -3,6 +3,8 @@ var fs=require('fs');
 var mime=require('mime');  //判断文件类型
 var path=require('path');
 var cache={}; //用cache来缓存文件内容的对象
+var chatServer=require('./lib/chat_server');
+
 
 //资源不存在时
 function send404(response){
@@ -55,3 +57,6 @@ var server=http.createServer(function(request,response){
 server.listen(3000,function(){
     console.log('server is running at http://localhost:3000');
 });
+
+//启动服务端的socket.io,给定它一个定义好的HTTP服务，共享一个TCP/IP端口
+chatServer.listen(server);
