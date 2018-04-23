@@ -11,26 +11,9 @@ var currentRoom={}; //存用户当前所在房间的键值对。键：用户的s
 exports.listen=function(server){
     io=socket.listen(server);  //启动socket.io服务器，允许它搭载在已有的HTTP服务器上
     io.set('log level',1);
- 
-    io.sockets.on('connection',function(socket){
-        guestNumber=assginGuestName(socket,guestNumber,nickNames,namesUsed); //在用户连接上来时赋予其一个访客名
-        joinRoom(socket,'Lobby'); //连接上的用户放入Lobby房间里
+    
 
-        //处理用户的消息，更名，聊天室的创建和变理
-        handleMessageBroadcasting(socket,nikeNames);
-        handleNameChangeAttempts(socket,nickNames,namesUsed);
-        handleRoomJoining(socket);
-        
-        //用户发出请求时，向其提供已被占用的聊天室列表
-        socket.on('rooms',function(){
-            socket.emit('rooms',io.sokets.manager.rooms);
-        });
-
-        //用户客户端断开连接
-        handleClientDisconnection(socket,nickNames,namesUsed);
-    });
-
-    //方法定义：
+     //方法定义：
     //分配昵称
     function assginGuestName(socket,guestNumber,nickNames,namesUsed){
         var name='Guest'+guestNumber;
@@ -54,7 +37,6 @@ exports.listen=function(server){
         socket.broadcast.to(room).emit('message',{
             text:nickNames[socket.id]+' has joined '+room+'.'
         });
-        
         var usersInRoom=io.sockets.clients(room);
         //如果房间不只当前这一个用户，那么做下汇总，都有谁
         if(usersInRoom.length>1){
@@ -116,7 +98,7 @@ exports.listen=function(server){
             });
         });
     }
-    //创建房间
+    //房间变更
     function handleRoomJoining(socket){
         socket.on('join',function(room){
             socket.leave(currentRoom[socket.id]);
@@ -131,4 +113,27 @@ exports.listen=function(server){
             delete nickNames[socket.id];
         })
     }
+
+
+    io.sockets.on('connection',function(socket){
+        guestNumber=assginGuestName(socket,guestNumber,nickNames,namesUsed); //在用户连接上来时赋予其一个访客名
+        joinRoom(socket,'Lobby'); //连接上的用户放入Lobby房间里
+
+        //处理用户的消息，更名，聊天室的创建和变理
+        handleMessageBroadcasting(socket,nickNames);
+        handleNameChangeAttempts(socket,nickNames,namesUsed);
+        handleRoomJoining(socket);
+        
+        //用户发出请求时，向其提供已被占用的聊天室列表
+        socket.on('rooms',function(){
+            socket.emit('rooms',io.sockets.manager.rooms);
+        });
+
+        //用户客户端断开连接
+        handleClientDisconnection(socket,nickNames,namesUsed);
+    });
+
+   
+
+    
 }
